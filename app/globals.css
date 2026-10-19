@@ -40,6 +40,22 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Keyboard-only audit (#58): keep focus visible on every interactive element,
+   including links and custom controls that don't use the .btn/.input classes. */
+:focus-visible {
+  outline: 2px solid rgb(var(--brand));
+  outline-offset: 2px;
+}
+
+/* Skip link: hidden until focused, then jumps to main content. */
+.skip-link {
+  @apply sr-only;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  @apply not-sr-only fixed left-4 top-4 z-50 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-brand-fg;
+}
+
 @layer components {
   .card {
     @apply rounded-xl border border-line bg-surface;

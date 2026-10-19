@@ -100,7 +100,14 @@ export function CancelButton({ sub, onDone }: { sub: Subscription; onDone: () =>
 
   if (!confirming) {
     return (
-      <button ref={triggerRef} type="button" className="btn-danger" onClick={() => setConfirming(true)}>
+      <button
+        ref={triggerRef}
+        type="button"
+        className="btn-danger"
+        aria-haspopup="dialog"
+        aria-expanded={confirming}
+        onClick={() => setConfirming(true)}
+      >
         Cancel subscription
       </button>
     );
@@ -112,13 +119,14 @@ export function CancelButton({ sub, onDone }: { sub: Subscription; onDone: () =>
       role="alertdialog"
       aria-modal="true"
       aria-labelledby={`cancel-${sub.id}`}
+      aria-describedby={`cancel-${sub.id}-desc`}
       tabIndex={-1}
       className="w-full space-y-3 rounded-lg border border-danger/40 bg-danger/5 p-4"
     >
       <h4 id={`cancel-${sub.id}`} className="font-semibold text-fg">
         Cancel subscription #{sub.id}?
       </h4>
-      <p className="text-sm text-fg">
+      <p id={`cancel-${sub.id}-desc`} className="text-sm text-fg">
         <strong>After you cancel, no further charges can occur.</strong> Not now, not later, not by the merchant,
         not by anyone. This is final and can&apos;t be undone — to subscribe again you would start a new
         subscription.
